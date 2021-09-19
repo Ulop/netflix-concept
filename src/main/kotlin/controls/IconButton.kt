@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import base.Colors
 
 @Composable
-fun IconButton(imageVector: ImageVector, onClick: () -> Unit) {
+fun IconButton(imageVector: ImageVector, onClick: () -> Unit = {}) {
     Image(
         imageVector,
         null,
