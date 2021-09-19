@@ -1,11 +1,11 @@
 package controls.sidemenu
 
-import MenuItem
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -13,8 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+
+import MenuItem
+import base.Colors
 
 
 sealed class SideMenuItem {
@@ -40,7 +42,7 @@ fun SideMenu(
         .drawWithContent {
             drawContent()
             drawLine(
-                Color(0xFFE3E4E9),
+                Colors.Outline,
                 start = Offset(this.size.width - 1, 0f),
                 end = Offset(this.size.width - 1, this.size.height)
             )
@@ -68,7 +70,7 @@ fun SideMenu(
                         Text(
                             item.title,
                             modifier = Modifier.padding(start = 32.dp, top = 16.dp, bottom = 16.dp),
-                            color = Color(0xFF808B8F)
+                            color = Colors.Primary
                         )
                     }
                 }

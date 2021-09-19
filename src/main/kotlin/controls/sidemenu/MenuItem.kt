@@ -10,12 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Unspecified as UnspecifiedColor
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerMoveFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+import base.Colors
 
 @Composable
 fun MenuItem(title: String, icon: String, modifier: Modifier = Modifier, selected: Boolean, onClick: () -> Unit) {
@@ -27,12 +29,12 @@ fun MenuItem(title: String, icon: String, modifier: Modifier = Modifier, selecte
             onEnter = { setHovered(true); true },
             onExit = { setHovered(false); true }
         )
-        .background(if (hovered) Color(0x0F7E9EB7) else Color.Unspecified)
+        .background(if (hovered) Colors.Hovered else UnspecifiedColor)
         .drawWithContent {
             drawContent()
             if (selected) {
                 drawRoundRect(
-                    Color(0xFFB91E22),
+                    Colors.DarkRed,
                     topLeft = Offset(0f, 8f),
                     size = this.size.copy(width = 4f, this.size.height - 16),
                     cornerRadius = CornerRadius(2f, 2f)
@@ -45,12 +47,12 @@ fun MenuItem(title: String, icon: String, modifier: Modifier = Modifier, selecte
         Icon(
             icon,
             modifier = Modifier.size(24.dp),
-            colorFilter = if (selected) ColorFilter.tint(Color(0xFFB91E22)) else ColorFilter.tint(Color(0xFFA3ABAE))
+            colorFilter = if (selected) ColorFilter.tint(Colors.DarkRed) else ColorFilter.tint(Colors.Primary)
         )
         Spacer(Modifier.width(16.dp))
         Text(
             title,
-            color = Color(0xFF808B8F),
+            color = Colors.Primary,
             fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
             fontSize = 16.sp
         )
