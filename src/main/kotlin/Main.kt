@@ -7,6 +7,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
@@ -17,15 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+
 import base.Colors
 import base.mainBackground
 import controls.IconButton
+import controls.SearchTextField
 import controls.sidemenu.SideMenu
 import controls.sidemenu.SideMenuItem
 
 @Composable
 @Preview
 fun App() {
+    val (searchText, setSearchText) = remember { mutableStateOf("") }
     Row(Modifier.fillMaxWidth().mainBackground()) {
         SideMenu(
             SideMenuItem.GroupHeader("Menu"),
@@ -45,6 +50,8 @@ fun App() {
                 IconButton(Icons.Default.KeyboardArrowLeft)
                 Spacer(Modifier.size(8.dp))
                 IconButton(Icons.Default.KeyboardArrowRight)
+                Spacer(Modifier.size(24.dp))
+                SearchTextField(searchText, setSearchText, Modifier.widthIn(min = 512.dp))
             }
         }
     }
