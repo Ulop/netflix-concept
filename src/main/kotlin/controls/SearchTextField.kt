@@ -1,12 +1,15 @@
 package controls
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -20,6 +23,8 @@ import base.Colors
 
 @Composable
 fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val focused = interactionSource.collectIsFocusedAsState()
     BasicTextField(
         value,
         onValueChange = onValueChange,
@@ -27,7 +32,11 @@ fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Mo
         singleLine = true,
         modifier = Modifier
             .drawBehind {
-                drawRoundRect(Colors.Primary, style = Stroke(1f), cornerRadius = CornerRadius(24f, 24f))
+                drawRoundRect(
+                    if (focused.value) Colors.PrimaryDark else Colors.Primary,
+                    style = Stroke(1f),
+                    cornerRadius = CornerRadius(24f, 24f)
+                )
             }
             .widthIn(min = 256.dp)
             .then(modifier),
@@ -39,6 +48,7 @@ fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Mo
                 innerTextField()
                 Spacer(Modifier.width(16.dp))
             }
-        }
+        },
+        interactionSource = interactionSource
     )
 }
