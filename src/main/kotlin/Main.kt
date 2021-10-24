@@ -27,8 +27,8 @@ import controls.SearchTextField
 import controls.sidemenu.SideMenu
 import controls.sidemenu.SideMenuItem
 
-@Composable
 @Preview
+@Composable
 fun App() {
     val (searchText, setSearchText) = remember { mutableStateOf("") }
     Row(Modifier.fillMaxWidth().mainBackground()) {

@@ -1,5 +1,6 @@
 package controls.sidemenu
 
+import MenuItem
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -10,12 +11,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-
-import MenuItem
 import base.Colors
 
 
@@ -25,9 +25,11 @@ sealed class SideMenuItem {
         val icon: String = "",
         val onClick: () -> Unit = {}
     ): SideMenuItem()
+
     class GroupHeader(val title: String): SideMenuItem()
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SideMenu(
     vararg menuItems: SideMenuItem,
