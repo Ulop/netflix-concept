@@ -5,14 +5,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import base.LocalRootWindowSize
 import base.mainBackground
 import controls.IconButton
 import controls.Logo
@@ -51,10 +54,6 @@ fun App() {
             }
         }
     }
-}
-
-val LocalRootWindowSize = staticCompositionLocalOf {
-    DpSize(800.dp, 600.dp)
 }
 
 fun main() = application {

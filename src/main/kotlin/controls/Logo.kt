@@ -1,6 +1,5 @@
 package controls
 
-import LocalRootWindowSize
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +15,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import base.Colors
+import base.LocalRootWindowSize
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

@@ -1,6 +1,5 @@
 package controls.sidemenu
 
-import LocalRootWindowSize
 import MenuItem
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
@@ -14,6 +13,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import base.Colors
+import base.LocalRootWindowSize
 
 
 sealed class SideMenuItem {
