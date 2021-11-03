@@ -2,27 +2,21 @@
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 
-import base.Colors
 import base.mainBackground
 import controls.IconButton
+import controls.Logo
 import controls.SearchTextField
 import controls.sidemenu.SideMenu
 import controls.sidemenu.SideMenuItem
@@ -70,12 +64,3 @@ fun main() = application {
     }
 }
 
-@Composable
-fun Logo(padding: PaddingValues = PaddingValues(0.dp)) {
-    Text(buildAnnotatedString {
-        append("Netflix")
-        withStyle(SpanStyle(color = Colors.DarkRed)) {
-            append(".")
-        }
-    }, color = Colors.PrimaryDark, fontSize = 48.sp, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(padding))
-}
