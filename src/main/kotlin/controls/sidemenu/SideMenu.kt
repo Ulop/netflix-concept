@@ -1,12 +1,9 @@
 package controls.sidemenu
 
+import LocalRootWindowSize
 import MenuItem
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,9 +21,9 @@ sealed class SideMenuItem {
         val title: String,
         val icon: String = "",
         val onClick: () -> Unit = {}
-    ): SideMenuItem()
+    ) : SideMenuItem()
 
-    class GroupHeader(val title: String): SideMenuItem()
+    class GroupHeader(val title: String) : SideMenuItem()
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -34,26 +31,30 @@ sealed class SideMenuItem {
 fun SideMenu(
     vararg menuItems: SideMenuItem,
     modifier: Modifier = Modifier,
-    header: @Composable LazyItemScope.() -> Unit = {}
-){
+    header: @Composable ColumnScope.() -> Unit = {}
+) {
     val (selectedIndex, setSelectedIndex) = remember { mutableStateOf(-1) }
+    val width = LocalRootWindowSize.current.width
+    val compact = remember(width) { width < 600.dp }
 
     val columnModifier = Modifier
-        .widthIn(128.dp, 256.dp)
-        .fillMaxHeight()
+        .animateContentSize()
         .drawWithContent {
             drawContent()
             drawLine(
                 Colors.Outline,
-                start = Offset(this.size.width - 1, 0f),
-                end = Offset(this.size.width - 1, this.size.height)
+                start = Offset(this.size.width - 2, 0f),
+                end = Offset(this.size.width - 2, this.size.height)
             )
         }
+        .widthIn(min = 48.dp, max = 260.dp)
+        .width(IntrinsicSize.Max)
+        .fillMaxHeight()
         .then(modifier)
 
-    LazyColumn(columnModifier) {
-        item("header", header)
-        itemsIndexed(menuItems) { index, item ->
+    Column(columnModifier) {
+        header(this)
+        menuItems.forEachIndexed { index, item ->
             when (item) {
                 is SideMenuItem.ClickableItem -> {
                     MenuItem(
@@ -63,14 +64,14 @@ fun SideMenu(
                             setSelectedIndex(index)
                             item.onClick()
                         },
-                        modifier = Modifier.padding(start = 32.dp, top = 8.dp, bottom = 8.dp),
-                        selected = index == selectedIndex
+                        selected = index == selectedIndex,
+                        compact = compact
                     )
                 }
                 is SideMenuItem.GroupHeader -> {
                     if (item.title.isNotEmpty()) {
                         Text(
-                            item.title,
+                            if (!compact) item.title else "",
                             modifier = Modifier.padding(start = 32.dp, top = 16.dp, bottom = 16.dp),
                             color = Colors.Primary
                         )

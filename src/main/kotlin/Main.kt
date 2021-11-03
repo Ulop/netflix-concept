@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-
 import base.mainBackground
 import controls.IconButton
 import controls.Logo
@@ -37,10 +36,13 @@ fun App() {
             SideMenuItem.GroupHeader("General"),
             SideMenuItem.ClickableItem("Settings", "icons/settings.svg"),
             SideMenuItem.ClickableItem("Log out", "icons/logout.svg"),
-            header = { Logo(PaddingValues(32.dp)) }
+            header = { Logo(PaddingValues(32.dp), Modifier.align(Alignment.CenterHorizontally)) }
         )
-        Box(Modifier.fillMaxSize()) {
-            Row(Modifier.heightIn(64.dp, 72.dp).padding(horizontal = 24.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.fillMaxSize()) {
+            Row(
+                Modifier.heightIn(64.dp, 72.dp).padding(horizontal = 24.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 IconButton(Icons.Default.KeyboardArrowLeft)
                 Spacer(Modifier.size(8.dp))
                 IconButton(Icons.Default.KeyboardArrowRight)
@@ -63,4 +65,3 @@ fun main() = application {
         }
     }
 }
-
