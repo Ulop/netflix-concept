@@ -5,9 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-class modifiers {
-}
-
 fun Modifier.mainBackground() = background(
     Brush.verticalGradient(
         listOf(

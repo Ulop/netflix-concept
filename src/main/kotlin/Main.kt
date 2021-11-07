@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +20,7 @@ import androidx.compose.ui.window.rememberWindowState
 import base.LocalRootWindowSize
 import base.mainBackground
 import controls.IconButton
+import controls.IconButtonWithBadge
 import controls.Logo
 import controls.SearchTextField
 import controls.sidemenu.SideMenu
@@ -50,7 +53,11 @@ fun App() {
                 Spacer(Modifier.size(8.dp))
                 IconButton(Icons.Default.KeyboardArrowRight)
                 Spacer(Modifier.size(24.dp))
-                SearchTextField(searchText, setSearchText, Modifier.widthIn(min = 512.dp))
+                SearchTextField(searchText, setSearchText)
+                Spacer(Modifier.weight(1f))
+                IconButtonWithBadge(Icons.Outlined.Notifications)
+                Spacer(Modifier.width(8.dp))
+                IconButtonWithBadge(Icons.Outlined.MailOutline)
             }
         }
     }

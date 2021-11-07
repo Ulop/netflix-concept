@@ -23,7 +23,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import base.Colors
@@ -48,17 +47,17 @@ fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Mo
                     cornerRadius = CornerRadius(24f, 24f)
                 )
             }
-            .widthIn(min = 256.dp)
-            .pointerInput(Unit, { })
+            .widthIn(min = 200.dp, max = 256.dp)
             .then(modifier),
         decorationBox = { innerTextField ->
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 8.dp)) {
                 Spacer(Modifier.width(16.dp))
                 Image(Icons.Default.Search, null, colorFilter = ColorFilter.tint(Colors.Primary))
                 Spacer(Modifier.width(8.dp))
-                Box(Modifier.weight(1f)) {
+                Box {
                     innerTextField()
                 }
+                Spacer(Modifier.weight(1f))
                 AnimatedVisibility(
                     value.isNotEmpty(),
                     enter = scaleIn(),
@@ -79,7 +78,7 @@ fun SearchTextField(value: String, onValueChange: (String) -> Unit, modifier: Mo
 @Preview
 @Composable
 fun SearchTextFieldPreview2() {
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+    Box {
         SearchTextField(
             "Some query!",
             onValueChange = {},

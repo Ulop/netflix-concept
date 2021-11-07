@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -37,20 +38,22 @@ fun SideMenu(
     val width = LocalRootWindowSize.current.width
     val compact = remember(width) { width < 600.dp }
 
-    val columnModifier = Modifier
-        .animateContentSize()
-        .drawWithContent {
-            drawContent()
-            drawLine(
-                Colors.Outline,
-                start = Offset(this.size.width - 2, 0f),
-                end = Offset(this.size.width - 2, this.size.height)
-            )
-        }
-        .widthIn(min = 48.dp, max = 260.dp)
-        .width(IntrinsicSize.Max)
-        .fillMaxHeight()
-        .then(modifier)
+    val columnModifier = remember(modifier) {
+        Modifier
+            .animateContentSize()
+            .drawWithContent {
+                drawContent()
+                drawLine(
+                    Colors.Outline,
+                    start = Offset(this.size.width - 2, 0f),
+                    end = Offset(this.size.width - 2, this.size.height)
+                )
+            }
+            .widthIn(min = 48.dp, max = 260.dp)
+            .width(IntrinsicSize.Max)
+            .fillMaxHeight()
+            .then(modifier)
+    }
 
     Column(columnModifier) {
         header(this)
@@ -70,9 +73,16 @@ fun SideMenu(
                 }
                 is SideMenuItem.GroupHeader -> {
                     if (item.title.isNotEmpty()) {
+                        val titleModifier = remember(compact) {
+                            if (!compact) Modifier.padding(
+                                start = 24.dp,
+                                top = 16.dp,
+                                bottom = 16.dp
+                            ) else Modifier.align(Alignment.CenterHorizontally).padding(vertical = 16.dp)
+                        }
                         Text(
-                            if (!compact) item.title else "",
-                            modifier = Modifier.padding(start = 32.dp, top = 16.dp, bottom = 16.dp),
+                            item.title,
+                            modifier = titleModifier,
                             color = Colors.Primary
                         )
                     }
