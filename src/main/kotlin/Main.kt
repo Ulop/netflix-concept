@@ -44,9 +44,9 @@ fun App() {
             SideMenuItem.ClickableItem("Log out", "icons/logout.svg"),
             header = { Logo(PaddingValues(32.dp), Modifier.align(Alignment.CenterHorizontally)) }
         )
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().padding(horizontal = 24.dp)) {
             Row(
-                Modifier.heightIn(64.dp, 72.dp).padding(horizontal = 24.dp),
+                Modifier.heightIn(64.dp, 72.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(Icons.Default.KeyboardArrowLeft)
@@ -61,6 +61,7 @@ fun App() {
                 Spacer(Modifier.width(8.dp))
                 UserInfoShort(Modifier.requiredSize(56.dp), userInfo)
             }
+            PosterPreview()
         }
     }
 }
