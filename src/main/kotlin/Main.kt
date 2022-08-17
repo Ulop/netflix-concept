@@ -19,17 +19,17 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import base.LocalRootWindowSize
 import base.mainBackground
-import controls.IconButton
-import controls.IconButtonWithBadge
-import controls.Logo
-import controls.SearchTextField
+import controls.*
 import controls.sidemenu.SideMenu
 import controls.sidemenu.SideMenuItem
+import data.getSampleUserData
 
 @Preview
 @Composable
 fun App() {
     val (searchText, setSearchText) = remember { mutableStateOf("") }
+    val userInfo = remember { getSampleUserData() }
+
     Row(Modifier.fillMaxWidth().mainBackground()) {
         SideMenu(
             SideMenuItem.GroupHeader("Menu"),
@@ -58,6 +58,8 @@ fun App() {
                 IconButtonWithBadge(Icons.Outlined.Notifications)
                 Spacer(Modifier.width(8.dp))
                 IconButtonWithBadge(Icons.Outlined.MailOutline)
+                Spacer(Modifier.width(8.dp))
+                UserInfoShort(Modifier.requiredSize(56.dp), userInfo)
             }
         }
     }
