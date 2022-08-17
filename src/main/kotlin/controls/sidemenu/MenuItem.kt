@@ -1,3 +1,7 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -26,7 +30,6 @@ fun MenuItem(
 ) {
     val rowModifier = Modifier
         .clickable(onClick = onClick)
-        .fillMaxWidth()
         .drawWithContent {
             drawContent()
             if (selected) {
@@ -47,14 +50,16 @@ fun MenuItem(
             modifier = Modifier.size(24.dp),
             colorFilter = if (selected) ColorFilter.tint(Colors.DarkRed) else ColorFilter.tint(Colors.Primary)
         )
-        if (!compact) {
-            Spacer(Modifier.width(16.dp))
-            Text(
-                title,
-                color = Colors.Primary,
-                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
-                fontSize = 16.sp,
-            )
+        AnimatedVisibility(!compact) {
+            Row {
+                Spacer(Modifier.width(16.dp))
+                Text(
+                    title,
+                    color = Colors.Primary,
+                    fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                    fontSize = 16.sp,
+                )
+            }
         }
     }
 }
