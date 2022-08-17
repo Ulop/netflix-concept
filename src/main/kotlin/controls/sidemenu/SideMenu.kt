@@ -1,7 +1,9 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package controls.sidemenu
 
 import MenuItem
-import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +42,6 @@ fun SideMenu(
 
     val columnModifier = remember(modifier) {
         Modifier
-            .animateContentSize()
             .drawWithContent {
                 drawContent()
                 drawLine(
@@ -50,12 +51,17 @@ fun SideMenu(
                 )
             }
             .widthIn(min = 48.dp, max = 260.dp)
-            .width(IntrinsicSize.Max)
+            .width(IntrinsicSize.Min)
             .fillMaxHeight()
             .then(modifier)
     }
 
     Column(columnModifier) {
+        val titleModifier = remember(compact) {
+            if (!compact) Modifier.padding(start = 24.dp)
+                .align(Alignment.Start) else Modifier.align(Alignment.CenterHorizontally)
+        }
+
         header(this)
         menuItems.forEachIndexed { index, item ->
             when (item) {
@@ -71,18 +77,12 @@ fun SideMenu(
                         compact = compact
                     )
                 }
+
                 is SideMenuItem.GroupHeader -> {
                     if (item.title.isNotEmpty()) {
-                        val titleModifier = remember(compact) {
-                            if (!compact) Modifier.padding(
-                                start = 24.dp,
-                                top = 16.dp,
-                                bottom = 16.dp
-                            ) else Modifier.align(Alignment.CenterHorizontally).padding(vertical = 16.dp)
-                        }
                         Text(
                             item.title,
-                            modifier = titleModifier,
+                            modifier = titleModifier.padding(vertical = 16.dp),
                             color = Colors.Primary
                         )
                     }
