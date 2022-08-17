@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import base.Colors
 
 @Composable
-fun Avatar(
+fun AvatarWithProgress(
     path: String,
     contentDescription: String = "",
     modifier: Modifier = Modifier,
@@ -41,23 +41,40 @@ fun Avatar(
                 style = Stroke(4f, cap = StrokeCap.Round)
             )
         }
-        Image(
-            painter = painterResource(path),
+        Avatar(
+            path,
             contentDescription = contentDescription,
             contentScale = ContentScale.Fit,
             modifier = modifier
-                .padding(10.dp)
-                .clip(RoundedCornerShape(100)),
+                .padding(10.dp),
             colorFilter = colorFilter
         )
     }
 }
 
 @Composable
+fun Avatar(
+    path: String,
+    contentDescription: String = "",
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Fit,
+    colorFilter: ColorFilter? = null
+) {
+    Image(
+        painter = painterResource(path),
+        contentDescription = contentDescription,
+        contentScale = contentScale,
+        modifier = modifier
+            .clip(RoundedCornerShape(100)),
+        colorFilter = colorFilter
+    )
+}
+
+@Composable
 @Preview()
 fun AvatarPreview() {
     Row {
-        Avatar("avatars/female.png", modifier = Modifier.size(96.dp))
+        AvatarWithProgress("avatars/female.png", modifier = Modifier.size(96.dp))
         Spacer(Modifier.width(16.dp))
         Column(Modifier.align(Alignment.CenterVertically)) {
             Text("Ramona F.", fontSize = 24.sp, fontWeight = FontWeight.Bold)

@@ -19,7 +19,7 @@ fun UserInfoShort(modifier: Modifier, user: User) {
     val level = remember(user.level) { "Level ${user.level}" }
 
     Row {
-        Avatar(user.avatar, modifier = modifier)
+        AvatarWithProgress(user.avatar, modifier = modifier)
         Spacer(Modifier.width(8.dp))
         Column(Modifier.align(Alignment.CenterVertically)) {
             Text(
