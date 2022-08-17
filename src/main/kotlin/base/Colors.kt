@@ -8,5 +8,6 @@ object Colors {
     val PrimaryLight = Color(0xFFE4E7EF)
     val PrimaryDark = Color(0xFF35424B)
     val Hovered = Color(0x0F7E9EB7)
-    val DarkRed = Color(0xFFB91E22)
+    val DarkRed = Color(0xFFD82128)
+    val SecondaryText = Color(0xFF94A9BC)
 }
