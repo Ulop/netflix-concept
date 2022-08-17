@@ -3,12 +3,11 @@ package controls
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
@@ -17,7 +16,9 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import base.Colors
 
 @Composable
@@ -55,5 +56,13 @@ fun Avatar(
 @Composable
 @Preview()
 fun AvatarPreview() {
-    Avatar("avatars/female.png", modifier = Modifier.size(96.dp))
+    Row {
+        Avatar("avatars/female.png", modifier = Modifier.size(96.dp))
+        Spacer(Modifier.width(16.dp))
+        Column(Modifier.align(Alignment.CenterVertically)) {
+            Text("Ramona F.", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(8.dp))
+            Text("Level 12", color = Colors.SecondaryText)
+        }
+    }
 }
